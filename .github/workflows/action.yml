@@ -40,3 +40,36 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Sanjeevani198_java-project
     
+    - name: jacoco-badge-generator
+  # You may pin to the exact commit or the version.
+  # uses: cicirello/jacoco-badge-generator@cae0608afbeac8e953e38a1a1ea288501ed78239
+      uses: cicirello/jacoco-badge-generator@v2.5.0
+      with:
+    # Full path, relative to the root of the repository, to the jacoco csv file(s), including filename(s)
+       jacoco-csv-file: target/site/jacoco/jacoco.csv
+    # The directory for storing badges, relative to the root of the repository.
+       badges-directory: .github/badges
+    # The filename of the coverage badge.
+       coverage-badge-filename: jacoco.svg
+    
+       
+    # Controls whether or not to generate the coverage badge.
+       generate-coverage-badge: true
+    # Controls whether or not to generate the branches coverage badge.
+       generate-branches-badge: false
+    # Controls what happens if one or more jacoco.csv files do not exist.
+       on-missing-report: fail
+    # Enables failing workflow run when coverage below specified threshold.
+       fail-if-coverage-less-than:  0
+    # Enables failing workflow run when branches coverage below specified threshold.
+       fail-if-branches-less-than: 0
+    # Enables failing workflow if coverage is less than it was on previous run.
+       fail-on-coverage-decrease: false
+    # Enables failing workflow if branches coverage is less than it was on previous run.
+       fail-on-branches-decrease: false
+    # List of coverage percentages as cutoffs for each color.
+       intervals: 100 90 80 70 60 0
+    # List of colors to use ordered by coverage interval, best coverage to worst.
+       colors: '#4c1 #97ca00 #a4a61d #dfb317 #fe7d37 #e05d44'
+    
+    
