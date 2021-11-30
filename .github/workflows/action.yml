@@ -34,12 +34,16 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
-    - name: Build and analyze
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Sanjeevani198_java-project
+#     - name: Build and analyze
+#       env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Sanjeevani198_java-project
     
+    
+    - name: Test with Maven
+      run: mvn -B test --file pom.xml
+      
     - name: jacoco-badge-generator
   # You may pin to the exact commit or the version.
   # uses: cicirello/jacoco-badge-generator@cae0608afbeac8e953e38a1a1ea288501ed78239
